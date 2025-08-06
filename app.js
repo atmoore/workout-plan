@@ -59,7 +59,7 @@ class PPLTracker {
             // Update UI to show active state
             document.getElementById('start-workout').style.display = 'none';
             document.getElementById('workout-timer').style.display = 'block';
-            document.getElementById('session-controls').style.display = 'flex';
+            document.getElementById('end-session-header-btn').style.display = 'block';
             
             // Restore sets
             this.currentWorkout.exercises.forEach((exercise, exerciseIndex) => {
@@ -186,14 +186,6 @@ class PPLTracker {
                 this.handleSetting(settingItem);
             }
             
-            // Handle session control clicks
-            if (e.target.id === 'save-progress-btn') {
-                this.saveProgress();
-            }
-            
-            if (e.target.id === 'end-session-btn') {
-                this.endSession();
-            }
         });
 
     }
@@ -278,8 +270,8 @@ class PPLTracker {
         const timer = document.getElementById('workout-timer');
         timer.style.display = 'block';
         
-        const sessionControls = document.getElementById('session-controls');
-        sessionControls.style.display = 'flex';
+        const endSessionBtn = document.getElementById('end-session-header-btn');
+        endSessionBtn.style.display = 'block';
         
         // Start timer
         this.startWorkoutTimer();
@@ -1001,16 +993,6 @@ class PPLTracker {
         localStorage.setItem('currentWorkoutSession', JSON.stringify(this.currentWorkoutSession));
     }
 
-    saveProgress() {
-        this.saveCurrentSession();
-        
-        // Show confirmation
-        const duration = Math.floor((new Date() - this.workoutStartTime) / 60000);
-        alert(`Progress saved! You can resume this workout later.\n\nWorkout: ${this.currentWorkout.name}\nDuration so far: ${duration} minutes`);
-        
-        // Return to workouts screen but keep session active
-        this.switchTab('workouts');
-    }
 
     endSession() {
         const confirmed = confirm('Are you sure you want to end this workout session? This will save your progress and complete the workout.');
@@ -1050,7 +1032,7 @@ class PPLTracker {
         // Reset UI
         document.getElementById('start-workout').style.display = 'inline-block';
         document.getElementById('workout-timer').style.display = 'none';
-        document.getElementById('session-controls').style.display = 'none';
+        document.getElementById('end-session-header-btn').style.display = 'none';
         
         // Show completion message
         alert(`Workout completed!\n\nDuration: ${duration} minutes\nExercises completed: ${Object.keys(workoutSession.exercises).length}`);

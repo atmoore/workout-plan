@@ -110,7 +110,10 @@
         <!-- Active Workout Tab -->
         <div id="active-workout" class="tab-content">
             <div class="page-header">
-                <button class="back-btn" onclick="window.pplTracker.switchTab('workouts')">← Back</button>
+                <div class="workout-header-top">
+                    <button class="back-btn" onclick="window.pplTracker.switchTab('workouts')">← Back</button>
+                    <button id="end-session-header-btn" class="end-session-btn" style="display: none;" onclick="window.pplTracker.endSession()">End Session</button>
+                </div>
                 <h1 id="workout-title">Push #1 - Week 1</h1>
                 <div class="workout-controls">
                     <button id="start-workout" class="primary-btn">Start Workout</button>
@@ -125,11 +128,6 @@
                 <!-- Exercises will be dynamically loaded here -->
             </div>
             
-            <!-- Session Controls (shown during active workout) -->
-            <div id="session-controls" class="session-controls" style="display: none;">
-                <button id="save-progress-btn" class="secondary-btn">Save Progress</button>
-                <button id="end-session-btn" class="danger-btn">End Session</button>
-            </div>
         </div>
 
 
