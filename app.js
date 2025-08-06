@@ -1089,4 +1089,15 @@ class PPLTracker {
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.pplTracker = new PPLTracker();
+    
+    // Register service worker for PWA functionality
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(function(registration) {
+                console.log('SW registered');
+            })
+            .catch(function(error) {
+                console.log('SW registration failed');
+            });
+    }
 });
